@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280">
+<title>Ubivu - Thermal Headroom (concept)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <nav class="rail">
+    <div class="logo"><img src="assets/ubicquia-icon-logo.png" alt="Ubicquia"></div>
+    <a><img src="assets/home.svg" alt=""></a>
+    <a class="on"><img src="assets/bolt.svg" alt=""></a>
+    <a><img src="assets/notification.svg" alt=""><span class="dot"></span></a>
+    <div class="sp"></div>
+    <a><img src="assets/admin.svg" alt=""></a>
+    <a><img src="assets/support.svg" alt=""></a>
+    <a><img src="assets/profile.svg" alt=""></a>
+  </nav>
+  <div class="main-col">
+    <header class="top">
+      <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Search by node id, pole id, node name, serial number, address</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="tagbtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2"><path d="M20.6 13.4l-7.2 7.2a2 2 0 01-2.8 0L3 13V3h10l7.6 7.6a2 2 0 010 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></div>
+      <h1>Thermal Headroom</h1>
+    </header>
+    <div class="body">
+      <aside class="side">
+        <div class="hd">
+          <div class="circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2.6"><path d="M15 18l-6-6 6-6"/></svg></div>
+          <div class="id"><div class="st"><i></i>On</div><div class="serial" id="serial"></div><div class="sub" id="serialSub"></div></div>
+          <div class="acts">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M14 4v16" stroke-width="4"/></svg>
+          </div>
+        </div>
+        <div class="tabs"><span>Explore</span><span>Manage</span><span>Network</span><span class="on">Activity</span></div>
+        <div class="info">
+          <div><b id="kvaRating"></b><small>kVA Rating</small></div>
+          <div><b>1P Aerial</b><small>Tx Type</small></div>
+          <div><b id="homes"></b><small>Services</small></div>
+        </div>
+        <div class="upd" id="upd"></div>
+        <div class="ov"><div class="circle"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0114 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>Overview</div>
+        <div class="mh">Metrics <div class="circle" style="width:26px;height:26px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2.6"><path d="M6 15l6-6 6 6"/></svg></div></div>
+        <div class="mlist" id="mlist"></div>
+      </aside>
+      <main class="mainarea">
+        <div class="mtop">
+          <div class="fleetline" id="fleetline"></div>
+          <div class="date"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="1.8"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span id="dateRange"></span></div>
+        </div>
+        <div class="grid">
+          <section class="card"><div class="ch"><h2>Hot-Spot &amp; Oil Temperature</h2><div class="chev"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2.6"><path d="M9 6l6 6-6 6"/></svg></div></div>
+            <div class="lg"><span><i style="background:#ff5600"></i>Oil Temperature</span><span><i style="background:#ffb800"></i>Modeled Oil</span><span><i style="background:#6a3cf0"></i>Hot-Spot (est.)</span><span><i style="background:#e02020"></i>120 &deg;C Limit</span></div>
+            <div class="cv"><canvas id="cHs"></canvas></div><p class="cap" id="capHs"></p></section>
+          <section class="card"><div class="ch"><h2>Insulation Aging</h2><div class="chev"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2.6"><path d="M9 6l6 6-6 6"/></svg></div></div>
+            <div class="lg"><span><i style="background:#00c700"></i>Daily Aging (days of life per day)</span><span><i style="background:#e02020"></i>Normal Life Rate</span></div>
+            <div class="cv"><canvas id="cAge"></canvas></div><p class="cap" id="capAge"></p></section>
+          <section class="card"><div class="ch"><h2>EV Hosting</h2><div style="display:flex;align-items:center;gap:10px"><select class="sel" id="alphaSel"></select><div class="chev"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2.6"><path d="M9 6l6 6-6 6"/></svg></div></div></div>
+            <div class="lg"><span><i style="background:#00b2ff"></i>Risk of exceeding 120 &deg;C or 1 day/day on the design day</span><span><i style="background:#e02020"></i>Risk Target</span></div>
+            <div class="cv"><canvas id="cEv"></canvas></div><p class="cap" id="capEv"></p></section>
+          <section class="card"><div class="ch"><h2>Overloaded Insight vs. Thermal Verdict</h2><div class="chev"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2.6"><path d="M9 6l6 6-6 6"/></svg></div></div>
+            <div class="lg"><span><i style="background:#e02020"></i>Replace</span><span><i style="background:#ffb800"></i>Monitor</span><span><i style="background:#00c700"></i>Defer</span></div>
+            <div class="cv"><canvas id="cSc"></canvas></div><p class="cap" id="capSc"></p></section>
+          <section class="card wide"><div class="ch"><h2>Fleet Thermal Ranking</h2><div class="chev"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0d1c4b" stroke-width="2.6"><path d="M9 6l6 6-6 6"/></svg></div></div>
+            <table class="nodes" id="tbl"></table><div class="tblfoot" id="tblfoot"></div><p class="cap" id="method"></p></section>
+        </div>
+        <div class="foot">Unofficial concept demo by Mohith Gajjela. Not affiliated with Ubicquia. Synthetic data; thermal limits per IEEE C57.91, parameters identified per unit.</div>
+      </main>
+    </div>
+  </div>
+</div>
+<script src="src/thermal.js"></script>
+<script src="data/fleet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
